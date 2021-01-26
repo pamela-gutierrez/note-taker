@@ -41,10 +41,7 @@ app.delete("/api/notes/:id"), function (request, response) {
     response.send("note removed")
 }
 
-// db.json
-app.get("/api/notes"), function (request, response) {
-    return response.json(notes)
-}
+
 
 
 // // api/delete notes
