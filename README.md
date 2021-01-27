@@ -11,7 +11,6 @@ This is a weather dashboard application that displays the weather condition for 
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
 * [JQuery](https://jquery.com/)
 * [GitHub](https://github.com/)
-* [Postman](https://www.postman.com/)
 * [Node.js](https://nodejs.org/en/)
 *  Git - used to track changes to code
 ______________________________________________________________________________
