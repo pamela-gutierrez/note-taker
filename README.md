@@ -5,7 +5,7 @@ This is a note taker that should allow the user to write, save, and delete notes
 
 #### **Deployed Link**
 
-* [See Live Site](https://git.heroku.com/stormy-bastion-03237.git)
+* [See Live Site](https://stormy-bastion-03237.herokuapp.com/)
 
 ![Site](Note-Taker-IMG.png)
 
