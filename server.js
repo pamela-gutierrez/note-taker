@@ -17,27 +17,26 @@ app.use(express.static("public"));
 
 // ROUTES/REDIRECTS
 // notes.html
-// app.get("/", function (request, response) {
-//     response.sendFile(path.join(__dirname, "index.html"));
-// });
-
-// index.html
-app.get("*", function (request, response) {
-    response.sendFile(path.join(__dirname, "public/notes.html"))
+app.get("/notes", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/notes.html"));
 });
 
+// index.html
+
+
 // api/display notes
-app.get("/api/notes", function (request, response) {
+app.get("/api/notes", function (req, res) {
     fs.readFile("db/db.json", "utf8", function (err, data) {
         if (err) throw err
-        return response.json(data);
+        return res.json(data);
     });
 
 });
 
-app.delete("/api/notes/:id"), function (request, response) {
+app.delete("/api/notes/:id"), function (req, res) {
     fs.readFile("db/db.json", "utf8", function (err, data) {
         // if (err) throw err;
+        var dbNotes = JSON.parse(data)
         var index = request.body.index;
         var newNotes = [];
         for (let i = 0; i < db.length; i++) {
@@ -50,13 +49,33 @@ app.delete("/api/notes/:id"), function (request, response) {
 }
 
 // POST / api / notes
-app.post("/api/notes", function (request, response) {
-    var newNotes = request.body
-    fs.writeFile("db/db.json", "utf8", function (err, data) {
+app.post("/api/notes", function (req, res) {
+    fs.readFile("db/db.json", res, function (err, data) {
         if (err) throw err;
-        response.send("Successfully wrote new note!")
-    })
-})
+        var dbNotes = JSON.parse(data)
+        var newNotesArr = [];
+        // var newNotes = request.body
+        dbNotes.push(req.body)
+        for (var i = 0; i < dbNotes.length; i++) {
+            var newNote =
+            {
+                title: dbNotes[i].title,
+                text: djNotes[i].text,
+                id: i
+            }
+            newNotesArr.push(newNote);
+        }
+        var dataInNotes = JSON.stringify(newNotesArr)
+        fs.writeFile(path.join(__dirname, "/db/db.json"), dataInNotes, function (err, data) {
+            if (err) throw err;
+            res.json(req.body)
+        });
+    });
+});
+
+app.get("*", function (req, res) {
+    res.sendFile(path.join(__dirname, "public/index.html"))
+});
 
 // Listener: this code "starts" the server.
 app.listen(PORT, function () {
