@@ -1,53 +1,52 @@
 # Note Taker
 
-This is a weather dashboard application that displays the weather condition for any city of the user's choice. In addition to showing the current weather in any given city, it will also display the 5 day forecast.
+This is a note taker that should allow the user to write, save, and delete notes. Unfortunately, there are still some glitches that need to be resolved such a new notes not displaying to the page despite being pushed into the db.json file. 
 
-![Site](weather-screenshot.png)
 
-* [See Video Walkthrough](https://pamela-gutierrez.github.io/weather-dashboard/)
+#### **Deployed Link**
+
+* [See Live Site](https://git.heroku.com/stormy-bastion-03237.git)
+
+![Site](Note-Taker-IMG.png)
+
 
 ## **Built With**
 * [HTML](https://developer.mozilla.org/en-US/docs/Web/HTML)
 * [CSS](https://developer.mozilla.org/en-US/docs/Web/CSS)
-* [JQuery](https://jquery.com/)
+* [JavaScript](https://www.javascript.com/)
+* [Express.js](https://expressjs.com/)
 * [GitHub](https://github.com/)
 * [Node.js](https://nodejs.org/en/)
 *  Git - used to track changes to code
 ______________________________________________________________________________
   
-### **Summary**
+### **Installation**
 
-The weather dashboard uses the Open Weather API to source weather data for any city of the user's chooseing around the world. The main body of the page is taken up by the most recently inputted city while the five day forecast is dynamically generated in blue cards underneath. The application is also capable of saving the most recently searched cities allowing the user to quickly refer to the cities most relevant to them. 
+If you're accessing the code and not the deployed site, you'll need to run 'npm install express' in your Terminal or Bash to assure that you have the proper dependencies.  
 
 ______________________________________________________________________________
 
 #### **Code Snippet**
 
-Sourcing information from the API involves using a unique API key to generate an object containing the informatin for each city. From there, we create variables by selecting specific elements in the object using dot notation. Finally, we concatonate the newly created variables to dynamically generate tags that are then pushed into the html using the .html method. 
+The code below displays the minimum requirements for the application to function. 
 ```
-            var cityName = response.city.name
-            var icon = response.list[0].weather[0].icon
-            var wind = response.list[0].wind.speed;
-            var humidity = response.list[0].main.humidity;
-            var temp = response.list[0].main.temp;
-            var iconPic = "http://openweathermap.org/img/wn/" + icon + "@2x.png";
+const express = require("express");
+const fs = require("fs");
+const path = require("path");
 
-            $(".city").html("<h1>" + cityName + "</h1>");
-            $(".icon").attr("src", iconPic)
-            $(".temp").html("<p>Temperature: " + temp + " F°" + "</p>");
-            $(".humidity").html("<p>Humidity: " + humidity + "%" + "</p>");
-            $(".wind").html("<p>Wind Speed: " + wind + " MPH" + "</p>")
+// Tells node that we are creating an "express" server
+const app = express();
+
+// Sets an initial port, listens in your browser.
+const PORT = process.env.PORT || 4040;
+
+// Sets up the Express app to handle data parsing.
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+app.use(express.static("public"));
 
 ```
-
-
 ______________________________________________________________________________
-
-
-#### **Deployed Link**
-
-
-
 ### **Author Links**
 
 * **PAMELA GUTIERREZ**

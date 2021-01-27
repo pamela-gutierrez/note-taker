@@ -9,7 +9,7 @@ const app = express();
 // Sets an initial port, I'll use this later in our listener.
 const PORT = process.env.PORT || 4040;
 
-// LOOOK THIS UP BECAUSE YOU DON'T REALLY UNDERSTAND IT. Sets up the Express app to handle data parsing.
+// Sets up the Express app to handle data parsing.
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static("public"));
@@ -20,8 +20,6 @@ app.use(express.static("public"));
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
 });
-
-// index.html
 
 
 // api/display notes
@@ -61,7 +59,7 @@ app.post("/api/notes", function (req, res) {
             {
                 title: dbNotes[i].title,
                 text: dbNotes[i].text,
-                id: [i]
+                id: i
             }
             dbNotes.push(newNote);
         }
@@ -73,6 +71,7 @@ app.post("/api/notes", function (req, res) {
     });
 });
 
+// Returns to index.html regardless of the path 
 app.get("*", function (req, res) {
     res.sendFile(path.join(__dirname, "public/index.html"))
 });
