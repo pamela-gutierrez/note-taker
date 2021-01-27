@@ -15,7 +15,7 @@ app.use(express.json());
 app.use(express.static("public"));
 
 
-// ROUTES/REDIRECTS
+// ROUTES
 // notes.html
 app.get("/notes", function (req, res) {
     res.sendFile(path.join(__dirname, "public/notes.html"));
@@ -55,15 +55,15 @@ app.post("/api/notes", function (req, res) {
         var dbNotes = JSON.parse(data)
         var newNotesArr = [];
         // var newNotes = request.body
-        dbNotes.push(req.body)
+        newNotesArr.push(req.body)
         for (var i = 0; i < dbNotes.length; i++) {
             var newNote =
             {
                 title: dbNotes[i].title,
-                text: djNotes[i].text,
-                id: i
+                text: dbNotes[i].text,
+                id: [i]
             }
-            newNotesArr.push(newNote);
+            dbNotes.push(newNote);
         }
         var dataInNotes = JSON.stringify(newNotesArr)
         fs.writeFile(path.join(__dirname, "/db/db.json"), dataInNotes, function (err, data) {
